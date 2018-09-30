@@ -1,12 +1,14 @@
 # Øving 6 TDT4120
 
-using Memoize
+# For teorioppgavene
+using Memoize # Må lastes ned med 'using Pkg; Pkg.add("Memoize")'
 
 # Matrisetraversering
 @memoize T(x,y) = (x > 1 && y > 1) ? T(x-1,y) + T(x,y-1) : 1
 # Rod-cut
 @memoize R(p,n) = (n == 0) ? 0 : maximum(map(i -> R(p,n-i)+p[i], collect(1:n)))
 
+# Praksisoppgaver
 
 function cumulative(weights)
     cumulative_weights = copy(weights)
@@ -40,6 +42,7 @@ function back_track(weights)
     return path
 end
 
+# Alternativ versjon
 function back_track2(weights)
     path = Array{Tuple{Int, Int}, 1}()
 
