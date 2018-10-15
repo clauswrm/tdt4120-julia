@@ -1,7 +1,7 @@
 # Øving 7 TDT4120
 
 # Fordi 1-linjere er gøy
-can_use_greedy(coins) = iszero(map(i -> coins[i] % coins[i+1], collect(1:length(coins)-1)))
+can_use_greedy(coins) = iszero(map(i -> coins[i] % coins[i+1], 1:length(coins)-1))
 
 function min_coins_greedy(coins, value)
 	n = 0

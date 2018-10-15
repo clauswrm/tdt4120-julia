@@ -11,18 +11,19 @@ using Memoize # Må lastes ned med 'using Pkg; Pkg.add("Memoize")'
 # Praksisoppgaver
 
 function cumulative(weights)
+    height, weight = size(weigths)
     cumulative_weights = copy(weights)
 
-    for y in 2:size(weights, 1)
-        for x in 1:size(weights, 2)
-            _min = cumulative_weights[y-1, x]
+    for y in 2:height
+        for x in 1:width
+            current_min = cumulative_weights[y-1, x]
             if (x > 1)
-                _min = min(_min, cumulative_weights[y-1, x-1])
+                current_min = min(current_min, cumulative_weights[y-1, x-1])
             end
-            if (x < size(weights, 2))
-                _min = min(_min, cumulative_weights[y-1, x+1])
+            if (x < width)
+                current_min = min(current_min, cumulative_weights[y-1, x+1])
             end
-            cumulative_weights[y, x] += _min
+            cumulative_weights[y, x] += current_min
         end
     end
     return cumulative_weights
@@ -35,7 +36,7 @@ function back_track(weights)
 
     lower, upper = 1, width
     for y in height:-1:1
-        min_x = findmin(view(weights, y, lower:upper))[2] + lower - 1
+        min_x = findmin(weights[y, lower:upper])[2] + lower - 1
         push!(path, (y, min_x))
         lower, upper = max(1, min_x - 1), min(width, min_x + 1)
     end
